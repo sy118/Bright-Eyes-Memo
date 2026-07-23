@@ -1,0 +1,97 @@
+page { background: #FFF5F8; overflow-x: hidden; }
+
+.settings-wrap {
+  padding: 32rpx;
+  padding-bottom: 60rpx;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.settings-header { margin-bottom: 28rpx; }
+.settings-title { font-size: 36rpx; font-weight: 800; color: #1C1C1E; margin-bottom: 8rpx; }
+.settings-sub { font-size: 24rpx; color: #8E8E93; }
+
+.card {
+  background: #fff; border-radius: 24rpx; padding: 28rpx;
+  box-shadow: 0 4rpx 20rpx rgba(255,107,157,0.08);
+  margin-bottom: 20rpx; box-sizing: border-box;
+}
+
+/* 全局开关 */
+.toggle-row { display: flex; align-items: center; justify-content: space-between; }
+.toggle-info { flex: 1; min-width: 0; margin-right: 16rpx; }
+.toggle-label { font-size: 28rpx; font-weight: 700; color: #1C1C1E; display: block; }
+.toggle-desc { font-size: 22rpx; color: #8E8E93; display: block; margin-top: 6rpx; }
+
+/* 智能排班 */
+.btn-smart {
+  background: linear-gradient(135deg, #FFD93D, #FFB347);
+  color: #fff; border-radius: 40rpx; padding: 24rpx 0;
+  font-size: 26rpx; font-weight: 700; text-align: center;
+  border: none; width: 100%; margin-bottom: 20rpx; display: block;
+  box-sizing: border-box;
+}
+
+/* 药品卡片 */
+.med-setting-header {
+  display: flex; align-items: center; margin-bottom: 20rpx;
+  flex-wrap: wrap; gap: 8rpx;
+}
+.med-dot { width: 18rpx; height: 18rpx; border-radius: 50%; margin-right: 12rpx; flex-shrink: 0; }
+.med-setting-name { font-size: 28rpx; font-weight: 700; color: #1C1C1E; flex: 1; min-width: 0; }
+
+.chip { display: inline-block; padding: 4rpx 16rpx; border-radius: 32rpx; font-size: 20rpx; font-weight: 600; flex-shrink: 0; }
+.chip-pink   { background: #FFE8F0; color: #FF6B9D; }
+.chip-purple { background: #F0EBFF; color: #9B7FE8; }
+.chip-gray   { background: #F2F2F7; color: #C7C7CC; }
+
+.card-inactive { opacity: 0.5; }
+
+.freq-hint { font-size: 20rpx; color: #8E8E93; margin-bottom: 16rpx; }
+
+/* 时间格子 */
+.time-slots { display: flex; flex-wrap: wrap; gap: 16rpx; }
+.time-chip {
+  border-radius: 16rpx; padding: 18rpx 12rpx;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  min-width: 120rpx; flex: 1; box-sizing: border-box;
+}
+.time-chip-active {
+  background: #FFF0F5; border: 2rpx solid #FFB3CC;
+}
+.time-chip-inactive {
+  background: #F8F8F8; border: 2rpx solid #E5E5EA;
+  opacity: 0.5;
+}
+.time-chip-active text:first-child { font-size: 28rpx; font-weight: 700; color: #FF6B9D; white-space: nowrap; }
+.time-chip-inactive text:first-child { font-size: 28rpx; font-weight: 700; color: #C7C7CC; white-space: nowrap; }
+.time-seq { font-size: 20rpx; color: #C7C7CC; margin-top: 6rpx; white-space: nowrap; }
+
+.lock-hint {
+  font-size: 20rpx; color: #9B7FE8; background: #F0EBFF;
+  border-radius: 12rpx; padding: 10rpx 16rpx; margin-top: 14rpx;
+  line-height: 1.5;
+}
+
+/* 错误 */
+.error-msg {
+  background: #FFF0F0; color: #FF3B30; border-radius: 16rpx;
+  padding: 16rpx 24rpx; font-size: 24rpx; margin-bottom: 16rpx;
+  box-sizing: border-box; word-break: break-all;
+}
+
+/* 保存按钮 */
+.btn-primary {
+  background: linear-gradient(135deg, #FF6B9D, #FF8FAB); color: #fff;
+  border-radius: 40rpx; padding: 26rpx 0; font-size: 28rpx; font-weight: 600;
+  text-align: center; border: none; width: 100%; display: block;
+  box-sizing: border-box;
+}
+.mt24 { margin-top: 24rpx; }
+
+/* QR码 */
+.qr-title { font-size: 28rpx; font-weight: 700; color: #1C1C1E; margin-bottom: 12rpx; }
+.qr-desc { font-size: 22rpx; color: #8E8E93; line-height: 1.6; margin-bottom: 20rpx; }
+.qr-wrap { display: flex; justify-content: center; }
+.qr-img { width: 280rpx; height: 280rpx; }

@@ -1,0 +1,84 @@
+<view class="ob-wrap">
+  <!-- 步骤指示器 -->
+  <view class="steps-bar">
+    <view class="step-dot {{currentStep >= 1 ? 'active' : ''}}">1</view>
+    <view class="step-line {{currentStep >= 2 ? 'active' : ''}}"></view>
+    <view class="step-dot {{currentStep >= 2 ? 'active' : ''}}">2</view>
+    <view class="step-line {{currentStep >= 3 ? 'active' : ''}}"></view>
+    <view class="step-dot {{currentStep >= 3 ? 'active' : ''}}">3</view>
+  </view>
+
+  <!-- Step 1: 手术日期 -->
+  <view wx:if="{{currentStep === 1}}" class="step-content">
+    <view class="hero-emoji">👁️✨</view>
+    <view class="ob-title">欢迎使用明眸小记</view>
+    <view class="ob-subtitle">让我们开始设置你的术后护理计划吧～</view>
+    <view class="card mt40">
+      <view class="field-label">📅 手术日期</view>
+      <picker mode="date" value="{{surgeryDate}}" end="{{todayStr}}" bindchange="onSurgeryDateChange">
+        <view class="date-picker-row">
+          <text class="{{surgeryDate ? 'date-val' : 'date-placeholder'}}">
+            {{surgeryDate || '请选择手术日期'}}
+          </text>
+          <text class="arrow-icon">›</text>
+        </view>
+      </picker>
+    </view>
+    <view class="hint-box" wx:if="{{surgeryDate}}">
+      <text class="text-pink text-bold">术后第 {{dayCount}} 天</text>
+      <text class="text-secondary">  {{weekLabel}}</text>
+    </view>
+    <button class="btn-primary mt40" bindtap="nextStep" disabled="{{!surgeryDate}}">
+      下一步 →
+    </button>
+  </view>
+
+  <!-- Step 2: 提醒时间设置 -->
+  <view wx:if="{{currentStep === 2}}" class="step-content">
+    <view class="ob-title">设置提醒时间 ⏰</view>
+    <view class="ob-subtitle">为每种眼药水设置每日提醒时间点</view>
+    <button class="btn-smart" bindtap="smartSchedule">✨ 一键智能排班</button>
+
+    <scroll-view scroll-y class="med-scroll">
+      <block wx:for="{{medicines}}" wx:key="name">
+        <view class="med-card">
+          <view class="med-header">
+            <view class="med-dot" style="background:{{item.color}}"></view>
+            <text class="med-name">{{item.name}}</text>
+            <view class="chip chip-pink">每日{{item.maxFreq}}次</view>
+            <view wx:if="{{item.locked12h}}" class="chip chip-purple ml8">🔒 ≥12h</view>
+          </view>
+          <view class="time-slots">
+            <block wx:for="{{item.times}}" wx:for-item="t" wx:for-index="ti" wx:key="ti">
+              <picker mode="time" value="{{t}}" bindchange="onTimeChange"
+                data-med="{{item.name}}" data-idx="{{ti}}">
+                <view class="time-chip">{{t || '--:--'}}</view>
+              </picker>
+            </block>
+          </view>
+        </view>
+      </block>
+    </scroll-view>
+
+    <view wx:if="{{timeError}}" class="error-msg">⚠️ {{timeError}}</view>
+    <view class="btn-row mt24">
+      <button class="btn-secondary btn-half" bindtap="prevStep">← 上一步</button>
+      <button class="btn-primary btn-half" bindtap="nextStep">下一步 →</button>
+    </view>
+  </view>
+
+  <!-- Step 3: PushPlus 二维码 -->
+  <view wx:if="{{currentStep === 3}}" class="step-content">
+    <view class="hero-emoji">📱</view>
+    <view class="ob-title">开启推送提醒</view>
+    <view class="ob-subtitle">扫码关注公众号，才能接收用药提醒消息哦～</view>
+    <view class="qr-card">
+      <image src="/images/pushplus-qr.png" mode="aspectFit" class="qr-img" show-menu-by-longpress="{{true}}"></image>
+    </view>
+    <view class="qr-hint">长按二维码可识别关注 💊</view>
+    <view class="btn-row mt24">
+      <button class="btn-secondary btn-half" bindtap="prevStep">← 上一步</button>
+      <button class="btn-mint btn-half" bindtap="finishSetup">完成设置 🎉</button>
+    </view>
+  </view>
+</view>

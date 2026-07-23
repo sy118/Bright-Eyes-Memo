@@ -1,0 +1,88 @@
+<scroll-view scroll-y class="followup-wrap">
+  <view class="fu-header">
+    <view class="fu-title">🏥 复查日程</view>
+    <view class="fu-sub">手术日期：{{surgeryDate}}</view>
+  </view>
+
+  <block wx:for="{{checkups}}" wx:key="label">
+    <view class="fu-card {{item.done ? 'fu-done' : ''}} {{item.isToday ? 'fu-today' : ''}} {{item.isUrgent ? 'fu-urgent' : ''}}">
+      <!-- 上方：图标 + 信息 -->
+      <view class="fu-card-top">
+        <view class="fu-icon">{{item.done ? '✅' : item.isToday ? '🔔' : item.isPast ? '⚠️' : '📅'}}</view>
+        <view class="fu-info">
+          <text class="fu-label">{{item.label}}</text>
+          <text class="fu-date">{{item.targetDate}}</text>
+          <text wx:if="{{item.done}}" class="fu-status text-mint">已完成复查</text>
+          <text wx:elif="{{item.isToday}}" class="fu-status text-pink">今天！请及时就诊</text>
+          <text wx:elif="{{item.isPast}}" class="fu-status text-danger">已过期，请尽快补查</text>
+          <text wx:elif="{{item.daysLeft <= 3}}" class="fu-status text-orange">还剩 {{item.daysLeft}} 天，请提前预约</text>
+          <text wx:else class="fu-status text-secondary">还剩 {{item.daysLeft}} 天</text>
+        </view>
+      </view>
+      <!-- 下方：操作按钮 -->
+      <view class="fu-card-bottom">
+        <button wx:if="{{!item.done}}" class="fu-btn" bindtap="markDone" data-idx="{{index}}">
+          📝 标记已完成复查
+        </button>
+        <view wx:else class="fu-result-wrap" bindtap="viewResult" data-idx="{{index}}">
+          <text class="fu-result-label">查看复查记录 ›</text>
+        </view>
+      </view>
+    </view>
+  </block>
+
+  <!-- 记录复查结果弹窗 -->
+  <view wx:if="{{showResultModal}}" class="modal-mask">
+    <view class="modal-box" catchtap="noop">
+      <view class="modal-title">📋 记录复查结果</view>
+      <view class="modal-label">{{editingCheckup.label}}</view>
+      <view class="result-form">
+        <view class="form-row">
+          <text class="form-label">视力（左/右）</text>
+          <input class="form-input" placeholder="如：1.0/1.2" value="{{resultForm.vision}}"
+            bindinput="onResultInput" data-field="vision"/>
+        </view>
+        <view class="form-row">
+          <text class="form-label">眼压（左/右）</text>
+          <input class="form-input" placeholder="如：14/15 mmHg" value="{{resultForm.pressure}}"
+            bindinput="onResultInput" data-field="pressure"/>
+        </view>
+        <view class="form-row">
+          <text class="form-label">备注</text>
+          <textarea class="form-textarea" placeholder="医生建议、注意事项等..."
+            value="{{resultForm.note}}" bindinput="onResultInput" data-field="note"/>
+        </view>
+      </view>
+      <view class="modal-btns">
+        <button class="btn-secondary btn-half" bindtap="closeModal">取消</button>
+        <button class="btn-primary btn-half" bindtap="saveResult">保存</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 查看已有记录弹窗 -->
+  <view wx:if="{{showViewModal}}" class="modal-mask">
+    <view class="modal-box" catchtap="noop">
+      <view class="modal-title">📋 {{viewingCheckup.label}}</view>
+      <view class="result-view">
+        <view class="rv-row">
+          <text class="rv-label">复查日期</text>
+          <text class="rv-val">{{viewingCheckup.targetDate}}</text>
+        </view>
+        <view wx:if="{{viewingCheckup.result.vision}}" class="rv-row">
+          <text class="rv-label">视力</text>
+          <text class="rv-val">{{viewingCheckup.result.vision}}</text>
+        </view>
+        <view wx:if="{{viewingCheckup.result.pressure}}" class="rv-row">
+          <text class="rv-label">眼压</text>
+          <text class="rv-val">{{viewingCheckup.result.pressure}}</text>
+        </view>
+        <view wx:if="{{viewingCheckup.result.note}}" class="rv-row">
+          <text class="rv-label">备注</text>
+          <text class="rv-val">{{viewingCheckup.result.note}}</text>
+        </view>
+      </view>
+      <button class="btn-primary mt24" bindtap="closeViewModal">关闭</button>
+    </view>
+  </view>
+</scroll-view>

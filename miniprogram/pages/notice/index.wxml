@@ -1,0 +1,100 @@
+<scroll-view scroll-y class="notice-wrap">
+  <!-- 今日已阅读 -->
+  <view class="read-bar {{noticeRead ? 'read-done' : ''}}" bindtap="toggleNoticeRead">
+    <view class="read-check {{noticeRead ? 'checked' : ''}}">
+      <text wx:if="{{noticeRead}}" class="check-mark">✓</text>
+    </view>
+    <text class="read-label">今日已阅读并遵守以上医嘱</text>
+  </view>
+
+  <!-- 1. 分阶段用药 -->
+  <view class="notice-section">
+    <view class="notice-title">💊 分阶段用药详表</view>
+    <block wx:for="{{phases}}" wx:key="id">
+      <view class="phase-card">
+        <view class="phase-header">
+          <view class="phase-badge">{{item.label}}</view>
+        </view>
+        <block wx:for="{{item.medicines}}" wx:for-item="med" wx:key="name">
+          <view class="med-row">
+            <view class="med-dot" style="background:{{med.color}}"></view>
+            <text class="med-name">{{med.name}}</text>
+            <view class="chip chip-pink">每日{{med.frequency}}次</view>
+          </view>
+        </block>
+        <view class="phase-hint">{{item.hint}}</view>
+      </view>
+    </block>
+  </view>
+
+  <!-- 2. 眼部卫生 -->
+  <view class="notice-section">
+    <view class="notice-title">🧼 眼部卫生与护理</view>
+    <view class="card">
+      <block wx:for="{{hygieneItems}}" wx:key="index">
+        <view class="notice-item">
+          <text class="item-dot">•</text>
+          <text class="item-text">{{item}}</text>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <!-- 3. 运动限制 -->
+  <view class="notice-section">
+    <view class="notice-title">🏃 运动与活动限制</view>
+    <view class="card">
+      <block wx:for="{{sportItems}}" wx:key="period">
+        <view class="sport-row">
+          <view class="sport-period">{{item.period}}</view>
+          <view class="sport-rule">{{item.rule}}</view>
+        </view>
+        <view wx:if="{{index < sportItems.length - 1}}" class="divider"></view>
+      </block>
+    </view>
+  </view>
+
+  <!-- 4. 正常术后反应 -->
+  <view class="notice-section">
+    <view class="notice-title">👁️ 正常术后反应</view>
+    <view class="card">
+      <block wx:for="{{normalReactions}}" wx:key="index">
+        <view class="notice-item">
+          <text class="item-dot text-mint">✓</text>
+          <text class="item-text">{{item}}</text>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <!-- 5. 禁忌 -->
+  <view class="notice-section">
+    <view class="notice-title">🚫 用眼、作息与饮食禁忌</view>
+    <view class="card">
+      <block wx:for="{{tabooItems}}" wx:key="index">
+        <view class="notice-item">
+          <text class="item-dot text-danger">✗</text>
+          <text class="item-text">{{item}}</text>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <!-- 6. 紧急就医 -->
+  <view class="notice-section">
+    <view class="notice-title emergency-title">🚨 紧急就医指征</view>
+    <view class="card emergency-card">
+      <view class="emergency-tip">出现以下任何情况，请立即就医！</view>
+      <block wx:for="{{emergencyItems}}" wx:key="index">
+        <view class="notice-item">
+          <text class="item-dot text-danger">⚠</text>
+          <text class="item-text text-danger">{{item}}</text>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <view class="disclaimer">
+    免责声明：本小程序为个人健康管理辅助工具，所有医疗决策必须遵从主治医师指导，不能替代专业医疗建议。
+  </view>
+</scroll-view>

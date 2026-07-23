@@ -1,0 +1,53 @@
+<scroll-view scroll-y class="profile-wrap">
+  <!-- 数据看板 -->
+  <view class="stats-card card">
+    <view class="stats-title">📊 打卡统计</view>
+    <view class="stats-grid">
+      <view class="stats-item">
+        <text class="stats-num text-pink">{{streakDays}}</text>
+        <text class="stats-label">连续打卡</text>
+        <text class="stats-unit">天</text>
+      </view>
+      <view class="stats-item">
+        <text class="stats-num text-mint">{{totalRate}}%</text>
+        <text class="stats-label">累计完成率</text>
+      </view>
+      <view class="stats-item">
+        <text class="stats-num text-purple">{{totalDays}}</text>
+        <text class="stats-label">总坚持天数</text>
+        <text class="stats-unit">天</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 日历视图 -->
+  <view class="card">
+    <view class="cal-header">
+      <view class="cal-nav" bindtap="prevMonth">‹</view>
+      <text class="cal-title">{{calYear}}年{{calMonth}}月</text>
+      <view class="cal-nav" bindtap="nextMonth">›</view>
+    </view>
+    <view class="cal-weekdays">
+      <text wx:for="{{weekdays}}" wx:key="*this" class="cal-wd">{{item}}</text>
+    </view>
+    <view class="cal-grid">
+      <block wx:for="{{calDays}}" wx:key="index">
+        <view class="cal-cell {{item.empty ? 'empty' : ''}} {{item.status}}"
+          bindtap="{{item.empty ? '' : 'goDetail'}}" data-date="{{item.dateStr}}">
+          <view class="cal-cell-inner">
+            <text wx:if="{{!item.empty}}" class="cal-day">{{item.day}}</text>
+            <text wx:if="{{item.status === 'done'}}" class="cal-mark">✅</text>
+            <text wx:elif="{{item.status === 'miss'}}" class="cal-mark">❌</text>
+            <text wx:elif="{{item.status === 'today'}}" class="cal-mark today-dot">●</text>
+          </view>
+        </view>
+      </block>
+    </view>
+    <view class="cal-legend">
+      <view class="legend-item"><text>✅</text><text class="legend-label">完成</text></view>
+      <view class="legend-item"><text>❌</text><text class="legend-label">漏打</text></view>
+      <view class="legend-item"><text class="today-dot">●</text><text class="legend-label">今天</text></view>
+    </view>
+  </view>
+
+</scroll-view>

@@ -1,0 +1,65 @@
+<scroll-view scroll-y class="settings-wrap">
+  <view class="settings-header">
+    <view class="settings-title">⏰ 提醒设置</view>
+    <view class="settings-sub">为每种眼药水设置每日提醒时间</view>
+  </view>
+
+  <!-- 全局开关 -->
+  <view class="card toggle-card">
+    <view class="toggle-row">
+      <view class="toggle-info">
+        <text class="toggle-label">开启用药提醒</text>
+        <text class="toggle-desc">通过 PushPlus 公众号推送提醒</text>
+      </view>
+      <switch checked="{{reminderEnabled}}" bindchange="onToggleReminder" color="#FF6B9D"/>
+    </view>
+  </view>
+
+  <!-- 智能排班 -->
+  <button class="btn-smart" bindtap="smartSchedule">✨ 一键智能排班</button>
+
+  <!-- 各药品时间设置 -->
+  <block wx:for="{{medicines}}" wx:key="name">
+    <view class="med-setting-card card {{item.currentFreq === null ? 'card-inactive' : ''}}">
+      <view class="med-setting-header">
+        <view class="med-dot" style="background:{{item.color}}"></view>
+        <text class="med-setting-name">{{item.name}}</text>
+        <view wx:if="{{item.locked12h}}" class="chip chip-purple">🔒 12h间隔</view>
+        <view wx:elif="{{item.currentFreq}}" class="chip chip-pink">本周{{item.currentFreq}}次</view>
+        <view wx:else class="chip chip-gray">本周不用</view>
+      </view>
+      <view wx:if="{{item.currentFreq}}" class="freq-hint">
+        最多{{item.maxFreq}}次，本周实际用前{{item.currentFreq}}个时间点
+      </view>
+      <view class="time-slots">
+        <block wx:for="{{item.times}}" wx:for-item="t" wx:for-index="ti" wx:key="ti">
+          <picker mode="time" value="{{t}}" bindchange="onTimeChange"
+            data-med="{{item.name}}" data-idx="{{ti}}">
+            <view class="time-chip {{item.currentFreq && ti < item.currentFreq ? 'time-chip-active' : 'time-chip-inactive'}}">
+              <text>{{t || '--:--'}}</text>
+              <text class="time-seq">第{{ti+1}}次</text>
+            </view>
+          </picker>
+        </block>
+      </view>
+      <view wx:if="{{item.locked12h}}" class="lock-hint">
+        💡 两次用药时间间隔必须≥12小时
+      </view>
+    </view>
+  </block>
+
+  <!-- 错误提示 -->
+  <view wx:if="{{timeError}}" class="error-msg">⚠️ {{timeError}}</view>
+
+  <!-- 保存按钮 -->
+  <button class="btn-primary mt24" bindtap="saveSettings">保存设置 💾</button>
+
+  <!-- PushPlus 二维码 -->
+  <view class="card qr-section">
+    <view class="qr-title">📱 接收推送提醒</view>
+    <view class="qr-desc">如未关注 PushPlus 公众号，请扫码关注后才能收到提醒消息</view>
+    <view class="qr-wrap">
+      <image src="/images/pushplus-qr.png" mode="aspectFit" class="qr-img" show-menu-by-longpress="{{true}}"></image>
+    </view>
+  </view>
+</scroll-view>

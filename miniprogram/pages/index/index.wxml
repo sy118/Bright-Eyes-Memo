@@ -1,0 +1,124 @@
+<view class="home-wrap">
+  <!-- 康复完成状态 -->
+  <view wx:if="{{recovered}}" class="recovered-page">
+    <view class="recovered-emoji">🎉👁️✨</view>
+    <view class="recovered-title">恭喜你！</view>
+    <view class="recovered-sub">ICL术后28天护理圆满完成</view>
+    <view class="recovered-sub2">你的眼睛已经很棒了，继续保持好习惯～</view>
+    <view class="card mt32">
+      <view class="stat-row">
+        <view class="stat-item">
+          <text class="stat-num text-pink">{{totalDays}}</text>
+          <text class="stat-label">坚持天数</text>
+        </view>
+        <view class="stat-item">
+          <text class="stat-num text-mint">{{totalRate}}%</text>
+          <text class="stat-label">总完成率</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 正常打卡状态 -->
+  <block wx:else>
+    <view class="home-header">
+      <view class="header-left">
+        <view class="day-badge">术后第 <text class="day-num">{{dayCount}}</text> 天</view>
+        <view class="week-label">{{weekLabel}}</view>
+      </view>
+      <view class="header-right" bindtap="goSettings">
+        <view class="settings-btn">⚙️</view>
+      </view>
+    </view>
+
+    <view wx:if="{{hasIncomplete}}" class="warning-bar">
+      ⚠️ 今日还有 <text class="text-bold">{{incompleteCount}}</text> 项任务未完成
+    </view>
+
+    <!-- 今日进度卡片（替换圆环） -->
+    <view class="card progress-card">
+      <view class="progress-header">
+        <view class="progress-left">
+          <text class="progress-pct" style="color:{{progressPct===100?'#4ECDC4':'#FF6B9D'}}">{{progressPct}}%</text>
+          <text class="progress-label">今日完成</text>
+        </view>
+        <view class="progress-right">
+          <text wx:if="{{progressPct===100}}" class="progress-done-tag">🎉 全部完成</text>
+          <text wx:else class="progress-remain">还差 {{incompleteCount}} 项</text>
+        </view>
+      </view>
+      <view class="progress-bar-wrap">
+        <view class="progress-bar-bg">
+          <view class="progress-bar-fill" style="width:{{progressPct}}%;background:{{progressPct===100?'#4ECDC4':'#FF6B9D'}}"></view>
+        </view>
+      </view>
+      <view class="progress-stats">
+        <view class="pstat">
+          <text class="pstat-num text-pink">{{doneMeds}}/{{totalMeds}}</text>
+          <text class="pstat-label">药品完成</text>
+        </view>
+        <view class="pstat-divider"></view>
+        <view class="pstat">
+          <text class="pstat-num text-mint">{{doneCareCnt}}/4</text>
+          <text class="pstat-label">护理完成</text>
+        </view>
+        <view class="pstat-divider"></view>
+        <view class="pstat">
+          <text class="pstat-num text-purple">{{streakDays}}</text>
+          <text class="pstat-label">连续打卡</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="section-title">💊 今日用药</view>
+    <block wx:for="{{medicines}}" wx:key="name">
+      <view class="med-card {{item.allDone ? 'med-done' : ''}}">
+        <view class="med-top">
+          <view class="med-dot" style="background:{{item.color}}"></view>
+          <view class="med-info flex-1">
+            <text class="med-name">{{item.name}}</text>
+          </view>
+          <view class="med-count">
+            <text class="count-done" style="color:{{item.color}}">{{item.done}}</text>
+            <text class="count-sep">/</text>
+            <text class="count-total">{{item.frequency}}</text>
+            <text class="count-unit">次</text>
+          </view>
+        </view>
+        <view class="med-progress-bar">
+          <view class="med-progress-fill" style="width:{{item.pct}}%;background:{{item.color}}"></view>
+        </view>
+        <view class="med-bottom">
+          <text class="med-hint-text">{{item.hint}}</text>
+          <button wx:if="{{!item.allDone}}" class="checkin-btn"
+            bindtap="checkMedicine" data-name="{{item.name}}">
+            完成1次 💊
+          </button>
+          <view wx:else class="done-badge">✅ 本日已完成</view>
+        </view>
+      </view>
+    </block>
+
+    <view class="section-title mt8">🌿 日常护理</view>
+    <view class="care-grid">
+      <view wx:for="{{careItems}}" wx:key="key"
+        class="care-card {{item.checked ? 'care-card-done' : ''}}"
+        bindtap="toggleCare" data-key="{{item.key}}">
+        <text class="care-icon">{{item.checked ? '✅' : item.icon}}</text>
+        <text class="care-label">{{item.label}}</text>
+        <text class="care-desc">{{item.desc}}</text>
+      </view>
+    </view>
+  </block>
+
+  <!-- 庆祝弹窗 -->
+  <view wx:if="{{showCelebration}}" class="modal-mask" bindtap="closeCelebration">
+    <view class="modal-box" catchtap="">
+      <view class="modal-emoji">🎊🌟🎊</view>
+      <view class="modal-title">太棒了！</view>
+      <view class="modal-sub">今日所有护理任务全部完成！</view>
+      <view class="modal-sub2">坚持就是胜利，你的眼睛会感谢你的 👁️💕</view>
+      <button class="btn-primary mt24" bindtap="closeCelebration">继续加油 💪</button>
+    </view>
+  </view>
+</view>

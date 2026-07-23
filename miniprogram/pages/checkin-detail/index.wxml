@@ -1,0 +1,52 @@
+<scroll-view scroll-y class="detail-wrap">
+  <view class="detail-header">
+    <view class="detail-date">{{displayDate}}</view>
+    <view class="detail-status {{allDone ? 'status-done' : 'status-miss'}}">
+      {{allDone ? '✅ 全部完成' : '❌ 未全部完成'}}
+    </view>
+  </view>
+
+  <!-- 无数据 -->
+  <view wx:if="{{!hasData}}" class="empty-state">
+    <view class="emoji">📭</view>
+    <text>这天没有打卡记录</text>
+  </view>
+
+  <!-- 用药记录 -->
+  <view wx:else>
+    <view class="section-title">💊 用药记录</view>
+    <block wx:for="{{medicines}}" wx:key="name">
+      <view class="med-card">
+        <view class="med-header">
+          <view class="med-dot" style="background:{{item.color}}"></view>
+          <text class="med-name">{{item.name}}</text>
+          <view class="med-count-badge {{item.allDone ? 'badge-done' : 'badge-miss'}}">
+            {{item.done}}/{{item.target}}次
+          </view>
+        </view>
+        <!-- 时间轴 -->
+        <view wx:if="{{item.logs.length > 0}}" class="timeline">
+          <view wx:for="{{item.logs}}" wx:for-item="log" wx:for-index="li" wx:key="li" class="timeline-item">
+            <view class="timeline-dot" style="background:{{item.color}}"></view>
+            <view class="timeline-line" wx:if="{{li < item.logs.length - 1}}"></view>
+            <text class="timeline-time">{{log}}</text>
+            <text class="timeline-label">第{{li+1}}次滴药</text>
+          </view>
+        </view>
+        <view wx:else class="no-log">暂无滴药时间记录</view>
+      </view>
+    </block>
+
+    <!-- 护理情况 -->
+    <view class="section-title mt16">🌿 护理情况</view>
+    <view class="card">
+      <block wx:for="{{careItems}}" wx:key="key">
+        <view class="care-row">
+          <text class="care-icon">{{item.checked ? '✅' : '⬜'}}</text>
+          <text class="care-label {{item.checked ? '' : 'text-miss'}}">{{item.label}}</text>
+        </view>
+        <view wx:if="{{index < careItems.length - 1}}" class="divider"></view>
+      </block>
+    </view>
+  </view>
+</scroll-view>

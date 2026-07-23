@@ -1,0 +1,60 @@
+page { background: #FFF5F8; }
+.detail-wrap { padding: 32rpx; padding-bottom: 60rpx; box-sizing: border-box; }
+
+.detail-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 32rpx;
+}
+.detail-date { font-size: 36rpx; font-weight: 800; color: #1C1C1E; }
+.detail-status { font-size: 24rpx; font-weight: 700; padding: 8rpx 20rpx; border-radius: 32rpx; }
+.status-done { background: #E8FAF8; color: #4ECDC4; }
+.status-miss { background: #FFF0F0; color: #FF3B30; }
+
+.section-title { font-size: 28rpx; font-weight: 700; color: #1C1C1E; margin-bottom: 16rpx; }
+.mt16 { margin-top: 24rpx; }
+
+/* 药品卡片 */
+.med-card {
+  background: #fff; border-radius: 24rpx; padding: 28rpx;
+  margin-bottom: 20rpx; box-shadow: 0 4rpx 20rpx rgba(255,107,157,0.08);
+}
+.med-header { display: flex; align-items: center; margin-bottom: 20rpx; }
+.med-dot { width: 18rpx; height: 18rpx; border-radius: 50%; margin-right: 14rpx; flex-shrink: 0; }
+.med-name { font-size: 28rpx; font-weight: 700; color: #1C1C1E; flex: 1; }
+.med-count-badge { font-size: 22rpx; font-weight: 700; padding: 6rpx 18rpx; border-radius: 24rpx; }
+.badge-done { background: #E8FAF8; color: #4ECDC4; }
+.badge-miss { background: #FFF0F0; color: #FF3B30; }
+
+/* 时间轴 */
+.timeline { padding-left: 8rpx; }
+.timeline-item {
+  display: flex; align-items: center; position: relative;
+  padding: 10rpx 0; padding-left: 32rpx;
+}
+.timeline-dot {
+  width: 16rpx; height: 16rpx; border-radius: 50%;
+  position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+  flex-shrink: 0;
+}
+.timeline-line {
+  position: absolute; left: 7rpx; top: calc(50% + 8rpx);
+  width: 2rpx; height: 20rpx; background: #F2F2F7;
+}
+.timeline-time { font-size: 32rpx; font-weight: 800; color: #1C1C1E; margin-right: 16rpx; }
+.timeline-label { font-size: 22rpx; color: #8E8E93; }
+.no-log { font-size: 24rpx; color: #C7C7CC; padding: 8rpx 0; }
+
+/* 护理 */
+.card {
+  background: #fff; border-radius: 24rpx; padding: 24rpx;
+  box-shadow: 0 4rpx 20rpx rgba(255,107,157,0.08);
+}
+.care-row { display: flex; align-items: center; padding: 16rpx 0; }
+.care-icon { font-size: 32rpx; margin-right: 16rpx; }
+.care-label { font-size: 28rpx; color: #1C1C1E; font-weight: 600; }
+.text-miss { color: #C7C7CC; }
+.divider { height: 1rpx; background: #F2F2F7; }
+
+/* 空状态 */
+.empty-state { display: flex; flex-direction: column; align-items: center; padding: 80rpx 0; color: #8E8E93; font-size: 28rpx; }
+.empty-state .emoji { font-size: 80rpx; margin-bottom: 20rpx; }

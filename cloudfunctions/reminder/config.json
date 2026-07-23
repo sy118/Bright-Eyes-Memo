@@ -1,0 +1,14 @@
+{
+  "triggers": [
+    {
+      "name": "fiveMinReminder",
+      "type": "timer",
+      "config": "0 0/5 8-21 * * * *"
+    },
+    {
+      "name": "dailySummary",
+      "type": "timer",
+      "config": "0 30 21 * * * *"
+    }
+  ]
+}

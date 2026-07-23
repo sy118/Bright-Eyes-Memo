@@ -1,0 +1,130 @@
+.ob-wrap {
+  min-height: 100vh;
+  background: #FFF5F8;
+  padding: 40rpx 32rpx 60rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 步骤条 */
+.steps-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 48rpx;
+}
+.step-dot {
+  width: 56rpx; height: 56rpx;
+  border-radius: 50%;
+  background: #F2F2F7;
+  color: #C7C7CC;
+  font-size: 24rpx;
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.3s;
+}
+.step-dot.active { background: #FF6B9D; color: #fff; }
+.step-line {
+  flex: 1; height: 4rpx; background: #F2F2F7;
+  margin: 0 12rpx; border-radius: 2rpx;
+  transition: all 0.3s;
+}
+.step-line.active { background: #FF6B9D; }
+
+/* 内容区 */
+.step-content { display: flex; flex-direction: column; flex: 1; }
+.hero-emoji { font-size: 100rpx; text-align: center; margin-bottom: 24rpx; }
+.ob-title { font-size: 40rpx; font-weight: 800; color: #1C1C1E; text-align: center; margin-bottom: 16rpx; }
+.ob-subtitle { font-size: 26rpx; color: #8E8E93; text-align: center; margin-bottom: 8rpx; }
+
+/* 日期选择 */
+.mt40 { margin-top: 40rpx; }
+.mt24 { margin-top: 24rpx; }
+.ml8  { margin-left: 8rpx; }
+.field-label { font-size: 26rpx; color: #8E8E93; margin-bottom: 16rpx; }
+.date-picker-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20rpx 0;
+}
+.date-val { font-size: 34rpx; font-weight: 700; color: #1C1C1E; }
+.date-placeholder { font-size: 30rpx; color: #C7C7CC; }
+.arrow-icon { font-size: 40rpx; color: #C7C7CC; }
+
+.hint-box {
+  background: #FFF0F5;
+  border-radius: 20rpx;
+  padding: 20rpx 28rpx;
+  margin-top: 20rpx;
+  display: flex; align-items: center;
+}
+
+/* 智能排班按钮 */
+.btn-smart {
+  background: linear-gradient(135deg, #FFD93D, #FFB347);
+  color: #fff;
+  border-radius: 48rpx;
+  padding: 22rpx 0;
+  font-size: 28rpx;
+  font-weight: 700;
+  text-align: center;
+  border: none;
+  width: 100%;
+  margin: 20rpx 0 24rpx;
+}
+
+/* 药品列表 */
+.med-scroll { max-height: 680rpx; }
+.med-card {
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 28rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 4rpx 20rpx rgba(255,107,157,0.08);
+}
+.med-header {
+  display: flex; align-items: center; margin-bottom: 20rpx;
+}
+.med-dot {
+  width: 20rpx; height: 20rpx; border-radius: 50%;
+  margin-right: 14rpx; flex-shrink: 0;
+}
+.med-name { font-size: 30rpx; font-weight: 700; color: #1C1C1E; flex: 1; }
+.time-slots { display: flex; flex-wrap: wrap; gap: 16rpx; }
+.time-chip {
+  background: #FFF0F5;
+  color: #FF6B9D;
+  border-radius: 32rpx;
+  padding: 12rpx 28rpx;
+  font-size: 26rpx;
+  font-weight: 600;
+  border: 2rpx solid #FFB3CC;
+}
+
+/* 错误提示 */
+.error-msg {
+  background: #FFF0F0;
+  color: #FF3B30;
+  border-radius: 16rpx;
+  padding: 16rpx 24rpx;
+  font-size: 24rpx;
+  margin-top: 16rpx;
+}
+
+/* 按钮行 */
+.btn-row { display: flex; gap: 20rpx; }
+.btn-half { flex: 1; }
+
+/* QR码 */
+.qr-card {
+  background: #fff;
+  border-radius: 28rpx;
+  padding: 40rpx;
+  margin: 32rpx 0 20rpx;
+  box-shadow: 0 8rpx 32rpx rgba(255,107,157,0.10);
+  display: flex; align-items: center; justify-content: center;
+}
+.qr-img { width: 360rpx; height: 360rpx; }
+.qr-hint {
+  font-size: 26rpx; color: #8E8E93; text-align: center;
+  line-height: 1.6; padding: 0 20rpx;
+}

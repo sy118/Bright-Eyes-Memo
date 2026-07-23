@@ -1,0 +1,53 @@
+{
+  "pages": [
+    "pages/onboarding/index",
+    "pages/index/index",
+    "pages/notice/index",
+    "pages/followup/index",
+    "pages/profile/index",
+    "pages/settings/index",
+    "pages/checkin-detail/index"
+  ],
+  "tabBar": {
+    "color": "#8E8E93",
+    "selectedColor": "#FF6B9D",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "打卡",
+        "iconPath": "images/icons/home.png",
+        "selectedIconPath": "images/icons/home-active.png"
+      },
+      {
+        "pagePath": "pages/notice/index",
+        "text": "须知",
+        "iconPath": "images/icons/examples.png",
+        "selectedIconPath": "images/icons/examples-active.png"
+      },
+      {
+        "pagePath": "pages/followup/index",
+        "text": "复查",
+        "iconPath": "images/icons/business.png",
+        "selectedIconPath": "images/icons/business-active.png"
+      },
+      {
+        "pagePath": "pages/profile/index",
+        "text": "我的",
+        "iconPath": "images/icons/usercenter.png",
+        "selectedIconPath": "images/icons/usercenter-active.png"
+      }
+    ]
+  },
+  "window": {
+    "backgroundColor": "#FFF5F8",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#FFF5F8",
+    "navigationBarTitleText": "明眸小记",
+    "navigationBarTextStyle": "black"
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2",
+  "lazyCodeLoading": "requiredComponents"
+}
